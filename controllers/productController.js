@@ -1,7 +1,6 @@
 const Product = require("../models/productModel");
 
 // Creating a product
-
 exports.createProduct = async (req, res) => {
   try {
     console.log(req.body);
@@ -18,6 +17,45 @@ exports.createProduct = async (req, res) => {
     res.status(400).json({
       status: "failed",
       message: "Invalid data send"
+    });
+  }
+};
+
+// Getting all Product
+exports.getAllProducts = async (req, res) => {
+  try {
+    const products = await Product.find();
+
+    res.status(200).json({
+      status: "success",
+      results: products.length,
+      data: {
+        products
+      }
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err
+    });
+  }
+};
+
+// Geting one product
+exports.getProduct = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        product
+      }
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err
     });
   }
 };
