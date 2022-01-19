@@ -1,0 +1,26 @@
+const mongoose = require("mongoose");
+
+const productOrderSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: [true, "A Product must have a name"]
+  },
+
+  orderNumber: {
+    type: Number,
+    required: [true, "A Product must have a orderNumber"]
+  },
+
+  contact: {
+    type: String,
+    required: [true, "A Product must have a contact"]
+  },
+
+  deliveryDetails: {
+    type: String
+  }
+});
+
+const ProductOrder = mongoose.model("ProductOrder", productOrderSchema);
+
+module.exports = ProductOrder;
