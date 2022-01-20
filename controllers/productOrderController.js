@@ -1,16 +1,14 @@
-const Product = require("../models/productModel");
+const ProductOrder = require("../models/productOrderModel");
 
-// Creating a product
-exports.createProduct = async (req, res) => {
+// Generating Orders
+exports.generateOrder = async (req, res) => {
   try {
-    console.log(req.body);
-
-    const newProduct = await Product.create(req.body);
+    const newOrder = await ProductOrder.create(req.body);
 
     res.status(201).json({
       status: "success",
       data: {
-        product: newProduct
+        order: newOrder
       }
     });
   } catch (err) {
@@ -21,16 +19,16 @@ exports.createProduct = async (req, res) => {
   }
 };
 
-// Getting all Product
-exports.getAllProducts = async (req, res) => {
+// Getting all Orders
+exports.getAllOrders = async (req, res) => {
   try {
-    const products = await Product.find();
+    const orders = await ProductOrder.find();
 
     res.status(200).json({
       status: "success",
-      results: products.length,
+      results: orders.length,
       data: {
-        products
+        orders
       }
     });
   } catch (err) {
@@ -41,15 +39,15 @@ exports.getAllProducts = async (req, res) => {
   }
 };
 
-// Getting one product
-exports.getProduct = async (req, res) => {
+// Getting one Order
+exports.getOrder = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id);
+    const order = await ProductOrder.findById(req.params.id);
 
     res.status(200).json({
       status: "success",
       data: {
-        product
+        order
       }
     });
   } catch (err) {
@@ -60,10 +58,10 @@ exports.getProduct = async (req, res) => {
   }
 };
 
-// Updateing a Product
-exports.updateProduct = async (req, res) => {
+// Updateing a Order
+exports.updateOrder = async (req, res) => {
   try {
-    const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    const order = await ProductOrder.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true
     });
@@ -71,7 +69,7 @@ exports.updateProduct = async (req, res) => {
     res.status(200).json({
       status: "success",
       data: {
-        product
+        order
       }
     });
   } catch (err) {
@@ -82,11 +80,10 @@ exports.updateProduct = async (req, res) => {
   }
 };
 
-
-// Deleteing a product
-exports.deleteProduct = async (req, res) => {
+// Deleteing a Order
+exports.deleteOrder = async (req, res) => {
   try {
-    await Product.findByIdAndDelete(req.params.id);
+    await ProductOrder.findByIdAndDelete(req.params.id);
 
     res.status(204).json({
       status: "success",

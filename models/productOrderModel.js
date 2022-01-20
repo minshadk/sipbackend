@@ -3,7 +3,9 @@ const mongoose = require("mongoose");
 const productOrderSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: [true, "A Product must have a name"]
+    required: [true, "A Product must have a name"],
+    unique: true,
+    trim: true
   },
 
   orderNumber: {
@@ -17,6 +19,11 @@ const productOrderSchema = new mongoose.Schema({
   },
 
   deliveryDetails: {
+    type: String,
+    trim: true
+  },
+
+  status: {
     type: String
   }
 });
