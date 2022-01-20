@@ -1,24 +1,19 @@
 const mongoose = require("mongoose");
 
-const productOrderSchema = new mongoose.Schema({
-  productName: {
+const serviceRequestSchema = new mongoose.Schema({
+  serviceName: {
     type: String,
     required: [true, "A Product must have a name"],
     unique: true,
     trim: true
   },
-
-  orderNumber: {
-    type: Number,
-    required: [true, "A Product must have a orderNumber"]
-  },
-
+  
   contact: {
     type: String,
     required: [true, "A Product must have a contact"]
   },
 
-  deliveryDetails: {
+  details: {
     type: String,
     trim: true
   },
@@ -29,6 +24,6 @@ const productOrderSchema = new mongoose.Schema({
   }
 });
 
-const ProductOrder = mongoose.model("ProductOrder", productOrderSchema);
+const ServiceRequest = mongoose.model("ServiceRequest", serviceRequestSchema);
 
-module.exports = ProductOrder;
+module.exports = ServiceRequest;
