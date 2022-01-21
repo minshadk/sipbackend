@@ -22,10 +22,9 @@ exports.generateRequest = async (req, res) => {
 };
 
 // Getting all Order
-exports.getAllOrder = async (req, res) => {
+exports.getAllRequest = async (req, res) => {
   try {
     const requests = await ServiceRequest.find();
-
     res.status(200).json({
       status: "success",
       results: requests.length,
@@ -42,7 +41,7 @@ exports.getAllOrder = async (req, res) => {
 };
 
 // Getting one Request
-exports.getProduct = async (req, res) => {
+exports.getRequest = async (req, res) => {
   try {
     const request = await ServiceRequest.findById(req.params.id);
 
@@ -72,6 +71,7 @@ exports.updateRequest = async (req, res) => {
       }
     );
 
+    console.log(request);
     res.status(200).json({
       status: "success",
       data: {
