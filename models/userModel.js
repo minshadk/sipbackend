@@ -9,7 +9,8 @@ const userSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: [true, "A Product must have a email"]
+    required: [true, "A Product must have a email"],
+    unique: true,
   },
   password: {
     type: String,
@@ -23,3 +24,7 @@ const userSchema = new mongoose.Schema({
     type: String
   }
 });
+
+const User = mongoose.model("User", userSchema);
+
+module.exports = User;

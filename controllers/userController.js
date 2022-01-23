@@ -1,14 +1,14 @@
-const Product = require("../models/productModel");
+const User = require("../models/userModel");
 
-// Creating a product
-exports.createProduct = async (req, res) => {
+// Creating a user
+exports.createUser = async (req, res) => {
   try {
-    const newProduct = await Product.create(req.body);
+    const newUser = await User.create(req.body);
 
     res.status(201).json({
       status: "success",
       data: {
-        product: newProduct
+        product: newUser
       }
     });
   } catch (err) {
@@ -19,16 +19,16 @@ exports.createProduct = async (req, res) => {
   }
 };
 
-// Getting all Product
-exports.getAllProducts = async (req, res) => {
+// Getting all User
+exports.getAllUsers = async (req, res) => {
   try {
-    const products = await Product.find();
+    const users = await User.find();
 
     res.status(200).json({
       status: "success",
-      results: products.length,
+      results: users.length,
       data: {
-        products
+        users
       }
     });
   } catch (err) {
@@ -39,15 +39,15 @@ exports.getAllProducts = async (req, res) => {
   }
 };
 
-// Getting one product
-exports.getProduct = async (req, res) => {
+// Getting one user
+exports.getUser = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.id);
+    const user = await User.findById(req.params.id);
 
     res.status(200).json({
       status: "success",
       data: {
-        product
+        user
       }
     });
   } catch (err) {
@@ -58,10 +58,10 @@ exports.getProduct = async (req, res) => {
   }
 };
 
-// Updateing a Product
-exports.updateProduct = async (req, res) => {
+// Updateing a User
+exports.updateUser = async (req, res) => {
   try {
-    const product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+    const user = await User.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true
     });
@@ -69,7 +69,7 @@ exports.updateProduct = async (req, res) => {
     res.status(200).json({
       status: "success",
       data: {
-        product
+        user
       }
     });
   } catch (err) {
@@ -80,11 +80,10 @@ exports.updateProduct = async (req, res) => {
   }
 };
 
-
-// Deleteing a product
-exports.deleteProduct = async (req, res) => {
+// Deleteing a user
+exports.deleteUser = async (req, res) => {
   try {
-    await Product.findByIdAndDelete(req.params.id);
+    await User.findByIdAndDelete(req.params.id);
 
     res.status(204).json({
       status: "success",

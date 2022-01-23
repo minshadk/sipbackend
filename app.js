@@ -1,9 +1,10 @@
 const express = require("express");
 
-const productRouter = require("./routes/productRoutes");
-const serviceRouter = require("./routes/serviceRoutes");
-const productOrderRouter = require("./routes/productOrderRoutes");
+const productRoutes = require("./routes/productRoutes");
+const serviceRoutes = require("./routes/serviceRoutes");
+const productOrderRoutes = require("./routes/productOrderRoutes");
 const serviceRequestRoutes = require("./routes/serviceRequestRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 const app = express();
 
@@ -13,9 +14,10 @@ const app = express();
 app.use(express.json());
 
 // ROUTES
-app.use("/product", productRouter);
-app.use("/service", serviceRouter);
-app.use("/productOrder", productOrderRouter);
+app.use("/product", productRoutes);
+app.use("/service", serviceRoutes);
+app.use("/productOrder", productOrderRoutes);
 app.use("/serviceRequest", serviceRequestRoutes);
+app.use("/user", userRoutes);
 
 module.exports = app;
