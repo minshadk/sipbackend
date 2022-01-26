@@ -1,6 +1,6 @@
 const express = require("express");
 
-const bloodDonor = require("../controllers/bloodDonor");
+const bloodDonor = require("../controllers/bloodDonorController");
 
 const router = express.Router();
 

@@ -1,4 +1,4 @@
-const BloodDonor = require("../models/bloodDonor");
+const BloodDonor = require("../models/bloodDonorModel");
 
 // Creating a product
 exports.createBloodDonor = async (req, res) => {
