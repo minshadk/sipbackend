@@ -24,10 +24,19 @@ const bloodDonor = new mongoose.Schema({
     required: [true, "A Donor must have a Phone Number"]
   },
 
+  // location: {
+  //   // May be needed to change type of location
+  //   type: String,
+  //   required: [true, "A Donor must have a Location"]
+  // },
   location: {
-    // May be needed to change type of location
-    type: String,
-    required: [true, "A Donor must have a Location"]
+    type: {
+      type: String,
+      default: "Point"
+    },
+    coordinates: {
+      type: [Number]
+    }
   },
 
   radius: {
@@ -36,6 +45,6 @@ const bloodDonor = new mongoose.Schema({
   }
 });
 
-const BloodDonor = mongoose.model("BloodDonor",bloodDonor);
+const BloodDonor = mongoose.model("BloodDonor", bloodDonor);
 
 module.exports = BloodDonor;
