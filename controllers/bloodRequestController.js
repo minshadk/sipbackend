@@ -100,3 +100,32 @@ exports.deleteBloodRequest = async (req, res) => {
     });
   }
 };
+
+
+exports.findingByRadius = async (req, res) => {
+    console.log("ite reaching here")
+  try {
+      console.log("ite reaching here")
+    const lat = 59.9165591;
+    const lng = 10.7881978;
+    const distanceInKilometer = 1;
+    const radius = distanceInKilometer / 6378.1;
+
+    const result = await BloodRequest.find({
+        location: { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
+    }).sort("-score");
+
+    res.status(200).json({
+      status: "success",
+      // results: bloodRequest.length,
+      data: {
+        result
+      }
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err
+    });
+  }
+};

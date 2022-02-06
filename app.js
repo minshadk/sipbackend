@@ -8,6 +8,9 @@ const userRoutes = require("./routes/userRoutes");
 const bloodDonorRoutes = require("./routes/bloodDonorRoutes");
 const bloodRequest = require("./routes/bloodRequestRoutes");
 
+
+const sendBloodRequestMsgRoutes = require("./routes/sendBloodRequestMsgRoutes")
+
 const app = express();
 
 // MIDDLEWARE
@@ -23,5 +26,7 @@ app.use("/serviceRequest", serviceRequestRoutes);
 app.use("/user", userRoutes);
 app.use("/bloodDonor", bloodDonorRoutes);
 app.use("/bloodRequest", bloodRequest);
+
+app.use("/sendBloodRequestMsg",sendBloodRequestMsgRoutes)
 
 module.exports = app;

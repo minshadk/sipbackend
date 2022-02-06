@@ -15,4 +15,5 @@ router
   .patch(bloodRequestController.updateBloodRequest)
   .delete(bloodRequestController.deleteBloodRequest);
 
+  router.route("/test").get(bloodRequestController.findingByRadius)
 module.exports = router;
