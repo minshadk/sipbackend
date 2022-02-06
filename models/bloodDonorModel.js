@@ -11,7 +11,7 @@ const bloodDonor = new mongoose.Schema({
 
   bloodGroup: {
     type: String,
-    required: [true, "A Donor must have a name"]
+    required: [true, "A Donor must have a bloodgroup"]
   },
 
   dateOfBirth: {
@@ -36,7 +36,8 @@ const bloodDonor = new mongoose.Schema({
     },
     coordinates: {
       type: [Number]
-    }
+    },
+    // required: [true, "A blood request must have a location"]
   },
 
   radius: {
