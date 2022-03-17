@@ -11,7 +11,7 @@ dotenv.config({ path: "./config.env" });
 mongoose
   .connect(process.env.URL)
   .then(() => console.log("connected to MOngodb"))
-  .catch((err) => console.error("ITs an error from "));
+  .catch((err) => console.error("ITs an error from database "));
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {

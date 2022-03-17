@@ -8,6 +8,11 @@ const productOrderSchema = new mongoose.Schema({
     trim: true
   },
 
+  // productId: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   required: true
+  // },
+
   orderNumber: {
     type: Number,
     required: [true, "A Product must have a orderNumber"]
