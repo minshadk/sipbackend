@@ -1,7 +1,20 @@
 const ServiceRequest = require("../models/serviceRequestModel");
 
+const Service = require("../models/serviceModel");
+
 // Generating a request
 exports.generateRequest = async (req, res) => {
+  const service = await Service.findById(req.body.service.serviceId);
+  // console.log(serviceName);
+
+  let serviceRequest = {
+    ...req.body,
+    service: {
+      serviceName: service.name,
+      serviceId: req.body.service.serviceId
+    }
+  };
+
   try {
     // const data = {
     //   contact: req.body.contact,
@@ -14,10 +27,12 @@ exports.generateRequest = async (req, res) => {
     //   }
     // };
 
-    const newRequest = await ServiceRequest.create(req.body);
+    const newRequest = await ServiceRequest.create(serviceRequest);
 
-    console.log(req.body);
+    // const data = [...req.body];
 
+    // console.log(...req.body);
+    // console.log(objClone);
     res.status(201).json({
       status: "success",
       data: {
@@ -26,6 +41,7 @@ exports.generateRequest = async (req, res) => {
       }
     });
   } catch (err) {
+    // console.log(objClone);
     res.status(400).json({
       status: "failed",
       message: "Invalid data send",
