@@ -3,27 +3,26 @@ const ServiceRequest = require("../models/serviceRequestModel");
 // Generating a request
 exports.generateRequest = async (req, res) => {
   try {
+    // const data = {
+    //   contact: req.body.contact,
+    //   details: req.body.details,
+    //   status: req.body.status,
+    //   // service.serviceName:req.body.status,
+    //   service: {
+    //     serviceName: req.body.service.serviceName,
+    //     serviceId: req.body.service.serviceId
+    //   }
+    // };
 
-    const data = {
-      contact: req.body.contact,
-      details: req.body.details,
-      status: req.body.status,
-      // service.serviceName:req.body.status,
-      service: {
-        serviceName: req.body.service.serviceName,
-        serviceId: req.body.service.serviceId
-      }
-    };
+    const newRequest = await ServiceRequest.create(req.body);
 
-    const newRequest = await ServiceRequest.create(data);
-
-    console.log(data);
+    console.log(req.body);
 
     res.status(201).json({
       status: "success",
       data: {
-        // request: newRequest
-        data
+        request: newRequest
+        // data
       }
     });
   } catch (err) {
