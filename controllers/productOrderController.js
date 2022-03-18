@@ -5,6 +5,8 @@ exports.generateOrder = async (req, res) => {
   try {
     const newOrder = await ProductOrder.create(req.body);
 
+    console.log("genreate product called")
+
     res.status(201).json({
       status: "success",
       data: {

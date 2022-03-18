@@ -3,20 +3,34 @@ const ServiceRequest = require("../models/serviceRequestModel");
 // Generating a request
 exports.generateRequest = async (req, res) => {
   try {
-    console.log(req.body);
 
-    const newRequest = await ServiceRequest.create(req.body);
+    const data = {
+      contact: req.body.contact,
+      details: req.body.details,
+      status: req.body.status,
+      // service.serviceName:req.body.status,
+      service: {
+        serviceName: req.body.service.serviceName,
+        serviceId: req.body.service.serviceId
+      }
+    };
+
+    const newRequest = await ServiceRequest.create(data);
+
+    console.log(data);
 
     res.status(201).json({
       status: "success",
       data: {
-        request: newRequest
+        // request: newRequest
+        data
       }
     });
   } catch (err) {
     res.status(400).json({
       status: "failed",
-      message: "Invalid data send"
+      message: "Invalid data send",
+      err
     });
   }
 };

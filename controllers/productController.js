@@ -14,7 +14,7 @@ exports.createProduct = async (req, res) => {
   } catch (err) {
     res.status(400).json({
       status: "failed",
-      message: "Invalid data send"
+      message: "Invalid data send",err
     });
   }
 };
