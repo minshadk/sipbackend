@@ -4,16 +4,19 @@ const Service = require("../models/serviceModel");
 
 // Generating a request
 exports.generateRequest = async (req, res) => {
-  const service = await Service.findById(req.body.service.serviceId);
+  const service = await Service.findById(req.body.serviceId);
   // console.log(serviceName);
 
   let serviceRequest = {
     ...req.body,
     service: {
       serviceName: service.name,
-      serviceId: req.body.service.serviceId
+      serviceId: req.body.serviceId
     }
+    // ...req.body,
   };
+  // serviceRequest.service.serviceName = service.name;
+
 
   try {
     // const data = {
@@ -36,16 +39,16 @@ exports.generateRequest = async (req, res) => {
     res.status(201).json({
       status: "success",
       data: {
-        request: newRequest
+        request: newRequest,
         // data
-      }
+      },
     });
   } catch (err) {
     // console.log(objClone);
     res.status(400).json({
       status: "failed",
       message: "Invalid data send",
-      err
+      err,
     });
   }
 };
@@ -58,13 +61,13 @@ exports.getAllRequest = async (req, res) => {
       status: "success",
       results: requests.length,
       data: {
-        requests
-      }
+        requests,
+      },
     });
   } catch (err) {
     res.status(404).json({
       status: "fail",
-      message: err
+      message: err,
     });
   }
 };
@@ -77,13 +80,13 @@ exports.getRequest = async (req, res) => {
     res.status(200).json({
       status: "success",
       data: {
-        request
-      }
+        request,
+      },
     });
   } catch (err) {
     res.status(404).json({
       status: "fail",
-      message: err
+      message: err,
     });
   }
 };
@@ -96,7 +99,7 @@ exports.updateRequest = async (req, res) => {
       req.body,
       {
         new: true,
-        runValidators: true
+        runValidators: true,
       }
     );
 
@@ -104,13 +107,13 @@ exports.updateRequest = async (req, res) => {
     res.status(200).json({
       status: "success",
       data: {
-        request
-      }
+        request,
+      },
     });
   } catch (err) {
     res.status(404).json({
       status: "fail",
-      message: err
+      message: err,
     });
   }
 };
@@ -122,12 +125,12 @@ exports.deleteRequest = async (req, res) => {
 
     res.status(204).json({
       status: "success",
-      data: null
+      data: null,
     });
   } catch (err) {
     res.status(404).json({
       status: "fail",
-      message: err
+      message: err,
     });
   }
 };
