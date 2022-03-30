@@ -1,4 +1,5 @@
 const express = require("express");
+const cors = require("cors");
 
 const productRoutes = require("./routes/productRoutes");
 const serviceRoutes = require("./routes/serviceRoutes");
@@ -17,6 +18,7 @@ const app = express();
 
 // Passing data through body
 app.use(express.json());
+app.use(cors());
 
 // ROUTES
 app.use("/product", productRoutes);

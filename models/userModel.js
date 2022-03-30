@@ -16,13 +16,13 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: [true, "A Product must have a password"]
   },
-  userType: {
-    type: String,
-    required: [true, "A Product must have a user type"]
-  },
-  subscribed: {
-    type: String
-  }
+  // userType: {
+  //   type: String,
+  //   required: [true, "A Product must have a user type"]
+  // },
+  // subscribed: {
+  //   type: String
+  // }
 });
 
 const User = mongoose.model("User", userSchema);
