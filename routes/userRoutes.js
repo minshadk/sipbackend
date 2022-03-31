@@ -9,6 +9,8 @@ router
   .post(userController.createUser)
   .get(userController.getAllUsers);
 
+router.route("/login").post(userController.logIn);
+
 router
   .route("/:id")
   .get(userController.getUser)

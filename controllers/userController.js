@@ -1,17 +1,40 @@
 const User = require("../models/userModel");
 
-// Creating a user
+// Creating a user Sing Up
 exports.createUser = async (req, res) => {
   try {
     const newUser = await User.create(req.body);
 
-    res.status(201).json({ 
+    res.status(201).json({
       status: "success",
       data: {
         user: newUser
       }
     });
   } catch (err) {
+    res.status(400).json({
+      status: "failed",
+      message: "Invalid data send"
+    });
+  }
+};
+
+// Login In
+exports.logIn = async (req, res) => {
+  try {
+    const user = await User.findOne({
+      email: req.body.email,
+      password: req.body.password
+    });
+
+    res.status(201).json({
+      status: "success",
+      data: {
+        user: user
+      }
+    });
+  } catch (err) {
+    console.log(err);
     res.status(400).json({
       status: "failed",
       message: "Invalid data send"
