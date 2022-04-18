@@ -9,15 +9,20 @@ const bloodDonor = new mongoose.Schema({
   //     trim: true
   //   },
 
+  name : {
+    type: String,
+    required: [true, "A Donor must have a Name"]
+  },
+
   bloodGroup: {
     type: String,
     required: [true, "A Donor must have a bloodgroup"]
   },
 
-  dateOfBirth: {
-    type: Date,
-    required: [true, "A Donor must have a Date of Birth"]
-  },
+  // dateOfBirth: {
+  //   type: Date,
+  //   required: [true, "A Donor must have a Date of Birth"]
+  // },
 
   phoneNumber: {
     type: Number,

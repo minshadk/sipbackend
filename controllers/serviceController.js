@@ -23,8 +23,10 @@ exports.createService = async (req, res) => {
 
 // Getting all Services
 exports.getAllServices = async (req, res) => {
+  console.log("get all services called")
   try {
     const services = await Service.find();
+    console.log(services)
 
     res.status(200).json({
       status: "success",
@@ -35,10 +37,10 @@ exports.getAllServices = async (req, res) => {
     });
   } catch (err) {
     res.status(404).json({
-      status: "fail",
+      status: "fail", 
       message: err
     });
-  }
+  } 
 };
 
 // Getting one ser

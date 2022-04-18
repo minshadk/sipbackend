@@ -11,9 +11,9 @@ dotenv.config({ path: "./config.env" });
 mongoose
   .connect(process.env.URL)
   .then(() => console.log("connected to MOngodb"))
-  .catch((err) => console.error("ITs an error from database "));
+  .catch((err) => console.error(err));
 
 const port = process.env.PORT || 3001;
 app.listen(port, () => {
   console.log(`App running on port ${3001}`);
-});
+}); 

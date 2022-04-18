@@ -8,7 +8,7 @@ exports.createBloodDonor = async (req, res) => {
     res.status(201).json({
       status: "success",
       data: {
-        product: newBloodDonor
+        bloodDonor: newBloodDonor
       }
     });
   } catch (err) {

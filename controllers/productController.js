@@ -2,6 +2,8 @@ const Product = require("../models/productModel");
 
 // Creating a product
 exports.createProduct = async (req, res) => {
+  console.log("form submited to the backend")
+  console.log(req.body)
   try {
     const newProduct = await Product.create(req.body);
 
