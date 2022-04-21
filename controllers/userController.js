@@ -28,6 +28,7 @@ exports.logIn = async (req, res) => {
     });
 
     res.status(201).json({
+      message: "Login success full",
       status: "success",
       data: {
         user: user

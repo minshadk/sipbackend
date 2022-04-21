@@ -1,45 +1,36 @@
 const mongoose = require("mongoose");
 
 const productOrderSchema = new mongoose.Schema({
-  // productName: {
-  //   type: String,
-  //   required: [true, "A Product must have a name"],
-  //   unique: true,
-  //   trim: true
-  // },
-
-  // productId: {
-  //   type: mongoose.Schema.Types.ObjectId,
-  //   required: true
-  // },
   product: {
-    productName: {
+    name: {
       type: String,
       required: true
     },
-    productId: {
+    id: {
       type: mongoose.Schema.Types.ObjectId,
       required: true
     }
   },
+
   orderNumber: {
-    type: Number,
+    type: String,
     required: [true, "A Product must have a orderNumber"]
   },
 
-  contact: {
+  phoneNumber: {
     type: String,
-    required: [true, "A Product must have a contact"]
+    required: [true, "A Product must have a phone number"]
   },
 
-  deliveryDetails: {
+  deliveryAddress: {
     type: String,
     trim: true
   },
 
   // Change to enum
   status: {
-    type: String
+    type: String,
+    default:"ordered"
   }
 });
 

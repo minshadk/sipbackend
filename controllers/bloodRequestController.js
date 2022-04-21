@@ -3,15 +3,17 @@ const BloodRequest = require("../models/bloodRequestModel");
 // Creating  a blood request
 exports.generateBloodRequest = async (req, res) => {
   try {
+    console.log(req.body)
     const newBloodRequest = await BloodRequest.create(req.body);
 
     res.status(201).json({
       status: "success",
       data: {
-        product: newBloodRequest
+        bloodRequest: newBloodRequest
       }
     });
   } catch (err) {
+    console.log(err)
     res.status(400).json({
       status: "failed",
       message: "Invalid data send"

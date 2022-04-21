@@ -1,20 +1,34 @@
 const ProductOrder = require("../models/productOrderModel");
+const Product = require("../models/productModel");
 
 // Generating Orders
 exports.generateOrder = async (req, res) => {
   try {
-    const newOrder = await ProductOrder.create(req.body);
-    
+    const product = await Product.findById(req.body.product.id);
+
+    const productOrder = {
+      ...req.body,
+      product: {
+        name: product.name,
+        id: req.body.product.id
+      }
+    };
+
+    const newOrder = await ProductOrder.create(productOrder);
+
     res.status(201).json({
       status: "success",
       data: {
         order: newOrder
       }
     });
+
   } catch (err) {
+    console.log(err);
     res.status(400).json({
       status: "failed",
-      message: "Invalid data send",err
+      message: "Invalid data send",
+      err
     });
   }
 };
@@ -61,10 +75,14 @@ exports.getOrder = async (req, res) => {
 // Updateing a Order
 exports.updateOrder = async (req, res) => {
   try {
-    const order = await ProductOrder.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true
-    });
+    const order = await ProductOrder.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+        runValidators: true
+      }
+    );
 
     res.status(200).json({
       status: "success",
