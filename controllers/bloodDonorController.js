@@ -1,4 +1,5 @@
 const BloodDonor = require("../models/bloodDonorModel");
+const BloodRequest = require("../models/bloodRequestModel");
 
 // Creating a product
 exports.createBloodDonor = async (req, res) => {
@@ -80,7 +81,7 @@ exports.updateBloodDonor = async (req, res) => {
   } catch (err) {
     res.status(404).json({
       status: "fail",
-    //   message: err
+      //   message: err
       message: "Its an error"
     });
   }
@@ -94,6 +95,58 @@ exports.deleteBloodDonor = async (req, res) => {
     res.status(204).json({
       status: "success",
       data: null
+    });
+  } catch (err) {
+    res.status(404).json({
+      status: "fail",
+      message: err
+    });
+  }
+};
+
+// Find  Donare
+
+exports.getDonorByCondition = async (req, res) => {
+  try {
+    // const bloodRequest = await BloodRequest.findById(req.params.id);
+    const bloodRequest = await BloodRequest.findById(
+      "625d9f93d1a66c7c8e17e5b7"
+    );
+
+    console.log("ist working");
+    const coordinates = bloodRequest.location.coordinates;
+    const lat = coordinates[0];
+    const lng = coordinates[1];
+
+    const distanceInKilometer = 500000;
+    const radius = distanceInKilometer / 6378.1;
+
+    // const bloodGroup = bloodRequest.bloodGroup;
+    const bloodGroup = "test +"
+
+    const bloodDonors = await BloodDonor.find({
+      location: { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
+    })
+      .sort("asc")
+      .limit(5);
+    // const bloodDonors = await BloodDonor.find({
+    //   $and: [
+    //     { loc: { $geoWithin: { $centerSphere: [[lng, lat], radius] } } },
+    //     { bloodGroup: { $eq: bloodGroup } }
+    //   ]
+    // })
+    //   .sort("asc")
+    //   .limit(5);
+
+    // const bloodDonors = await BloodDonor.aggregate([{$match:{bloodGroup:"test +"}}])
+
+    console.log(bloodDonors);
+
+    res.status(200).json({
+      status: "success",
+      data: {
+        bloodDonor
+      }
     });
   } catch (err) {
     res.status(404).json({

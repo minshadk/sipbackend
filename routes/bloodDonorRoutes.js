@@ -15,5 +15,6 @@ router
   .patch(bloodDonor.updateBloodDonor)
   .delete(bloodDonor.deleteBloodDonor);
 
+router.route("/findDonare/:id").get(bloodDonor.getDonorByCondition);
+
 module.exports = router;
- 

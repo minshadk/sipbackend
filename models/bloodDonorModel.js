@@ -1,15 +1,12 @@
 const mongoose = require("mongoose");
 
 const bloodDonor = new mongoose.Schema({
-  // Id from userModle
-  // name: {
-  //     type: String,
-  //     required: [true, "A Product must have a name"],
-  //     unique: true,
-  //     trim: true
-  //   },
+  userId: {
+    type: mongoose.Schema.Types.ObjectId
+    // required: true
+  },
 
-  name : {
+  name: {
     type: String,
     required: [true, "A Donor must have a Name"]
   },
@@ -29,11 +26,6 @@ const bloodDonor = new mongoose.Schema({
     required: [true, "A Donor must have a Phone Number"]
   },
 
-  // location: {
-  //   // May be needed to change type of location
-  //   type: String,
-  //   required: [true, "A Donor must have a Location"]
-  // },
   location: {
     type: {
       type: String,
@@ -41,7 +33,7 @@ const bloodDonor = new mongoose.Schema({
     },
     coordinates: {
       type: [Number]
-    },
+    }
     // required: [true, "A blood request must have a location"]
   },
 

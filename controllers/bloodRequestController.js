@@ -3,7 +3,7 @@ const BloodRequest = require("../models/bloodRequestModel");
 // Creating  a blood request
 exports.generateBloodRequest = async (req, res) => {
   try {
-    console.log(req.body)
+    console.log(req.body);
     const newBloodRequest = await BloodRequest.create(req.body);
 
     res.status(201).json({
@@ -13,7 +13,7 @@ exports.generateBloodRequest = async (req, res) => {
       }
     });
   } catch (err) {
-    console.log(err)
+    console.log(err);
     res.status(400).json({
       status: "failed",
       message: "Invalid data send"
@@ -103,18 +103,17 @@ exports.deleteBloodRequest = async (req, res) => {
   }
 };
 
-
 exports.findingByRadius = async (req, res) => {
-    console.log("ite reaching here")
+  console.log("ite reaching here");
   try {
-      console.log("ite reaching here")
+    console.log("ite reaching here");
     const lat = 59.9165591;
     const lng = 10.7881978;
     const distanceInKilometer = 1;
     const radius = distanceInKilometer / 6378.1;
 
     const result = await BloodRequest.find({
-        location: { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
+      location: { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
     }).sort("-score");
 
     res.status(200).json({
