@@ -10,7 +10,7 @@ const bloodRequest = new mongoose.Schema({
       type:String,
   },
 
-  case: {
+  cases: {
       type:String,
   },
 

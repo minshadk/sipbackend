@@ -15,6 +15,7 @@ const sendBloodRequestMsgRoutes = require("./routes/sendBloodRequestMsgRoutes")
 const app = express();
 
 // MIDDLEWARE
+app.use(cors());
 
 // Passing data through body
 app.use(express.json());
