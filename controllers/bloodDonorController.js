@@ -124,19 +124,19 @@ exports.getDonorByCondition = async (req, res) => {
     // const bloodGroup = bloodRequest.bloodGroup;
     const bloodGroup = "test +"
 
-    const bloodDonors = await BloodDonor.find({
-      location: { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
-    })
-      .sort("asc")
-      .limit(5);
     // const bloodDonors = await BloodDonor.find({
-    //   $and: [
-    //     { loc: { $geoWithin: { $centerSphere: [[lng, lat], radius] } } },
-    //     { bloodGroup: { $eq: bloodGroup } }
-    //   ]
+    //   location: { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
     // })
     //   .sort("asc")
     //   .limit(5);
+    const bloodDonors = await BloodDonor.find({
+      $and: [
+        { loc: { $geoWithin: { $centerSphere: [[lng, lat], radius] } } },
+        { bloodGroup: { $eq: bloodGroup } }
+      ]
+    })
+      .sort("asc")
+      .limit(5);
 
     // const bloodDonors = await BloodDonor.aggregate([{$match:{bloodGroup:"test +"}}])
 

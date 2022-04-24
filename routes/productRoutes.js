@@ -2,11 +2,13 @@ const express = require("express");
 
 const productController = require("../controllers/productController");
 
+const parser = require("../middleware/imageUploadMiddleware");
+
 const router = express.Router();
 
 router
   .route("/")
-  .post(productController.createProduct)
+  .post(parser.single("image"), productController.createProduct)
   .get(productController.getAllProducts);
 
 router

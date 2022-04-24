@@ -2,10 +2,16 @@ const Product = require("../models/productModel");
 
 // Creating a product
 exports.createProduct = async (req, res) => {
-  console.log("form submited to the backend")
-  console.log(req.body)
+  console.log("form submited to the backend");
+  console.log(req.body);
+
+  const productDetails = {
+    ...req.body,
+    image: req.file.path
+  };
+
   try {
-    const newProduct = await Product.create(req.body);
+    const newProduct = await Product.create(productDetails);
 
     res.status(201).json({
       status: "success",
@@ -14,9 +20,11 @@ exports.createProduct = async (req, res) => {
       }
     });
   } catch (err) {
+    console.log(err)
     res.status(400).json({
       status: "failed",
-      message: "Invalid data send",err
+      message: "Invalid data send",
+      err,
     });
   }
 };
@@ -81,7 +89,6 @@ exports.updateProduct = async (req, res) => {
     });
   }
 };
-
 
 // Deleteing a product
 exports.deleteProduct = async (req, res) => {
