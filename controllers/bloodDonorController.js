@@ -9,13 +9,13 @@ exports.createBloodDonor = async (req, res) => {
     res.status(201).json({
       status: "success",
       data: {
-        bloodDonor: newBloodDonor,
-      },
+        bloodDonor: newBloodDonor
+      }
     });
   } catch (err) {
     res.status(400).json({
       status: "failed",
-      message: "Invalid data send",
+      message: "Invalid data send"
     });
   }
 };
@@ -29,13 +29,13 @@ exports.getAllBloodDonors = async (req, res) => {
       status: "success",
       results: bloodDonors.length,
       data: {
-        bloodDonors,
-      },
+        bloodDonors
+      }
     });
   } catch (err) {
     res.status(404).json({
       status: "fail",
-      message: err,
+      message: err
     });
   }
 };
@@ -48,13 +48,13 @@ exports.getBloodDonor = async (req, res) => {
     res.status(200).json({
       status: "success",
       data: {
-        bloodDonor,
-      },
+        bloodDonor
+      }
     });
   } catch (err) {
     res.status(404).json({
       status: "fail",
-      message: err,
+      message: err
     });
   }
 };
@@ -68,21 +68,21 @@ exports.updateBloodDonor = async (req, res) => {
       req.body,
       {
         new: true,
-        runValidators: true,
+        runValidators: true
       }
     );
 
     res.status(200).json({
       status: "success",
       data: {
-        bloodDonor,
-      },
+        bloodDonor
+      }
     });
   } catch (err) {
     res.status(404).json({
       status: "fail",
       //   message: err
-      message: "Its an error",
+      message: "Its an error"
     });
   }
 };
@@ -94,12 +94,12 @@ exports.deleteBloodDonor = async (req, res) => {
 
     res.status(204).json({
       status: "success",
-      data: null,
+      data: null
     });
   } catch (err) {
     res.status(404).json({
       status: "fail",
-      message: err,
+      message: err
     });
   }
 };
@@ -107,32 +107,26 @@ exports.deleteBloodDonor = async (req, res) => {
 // Find  Donare
 
 exports.getDonorByCondition = async (req, res) => {
+  console.log(req.params.id);
   console.log("ist working");
   try {
     // const bloodRequest = await BloodRequest.findById(req.params.id);
-    const bloodRequest = await BloodRequest.findById(
-      "625d9f93d1a66c7c8e17e5b7"
-    );
+    const bloodRequest = await BloodRequest.findById(req.params.id);
+    console.log(bloodRequest);
 
     const coordinates = bloodRequest.location.coordinates;
     const lat = coordinates[0];
     const lng = coordinates[1];
-
+    const bloodGroup = bloodRequest.bloodGroup;
     const distanceInKilometer = 500000;
     const radius = distanceInKilometer / 6378.1;
 
     // const bloodGroup = bloodRequest.bloodGroup;
-    const bloodGroup = "test +";
+    // const bloodGroup = "test +";
 
-    // const bloodDonors = await BloodDonor.find({
-    //   location: { $geoWithin: { $centerSphere: [[lng, lat], radius] } },
-    // })
-    //   .sort("asc")
-    //   .limit(5);
-
-    // const a = bloodDonors.filter((donor) => {
-    //   donor.bloodGroup === bloodGroup;
-    // });
+    const bloodDonors = await BloodDonor.find({
+      location: { $geoWithin: { $centerSphere: [[lng, lat], radius] } }
+    }).sort("asc");
 
     // const bloodDonors = await BloodDonor.find({
     //   $and: [
@@ -142,20 +136,20 @@ exports.getDonorByCondition = async (req, res) => {
     // })
     //   .sort("asc")
     //   .limit(5);
-    const bloodDonors = await BloodDonor.find({
-      $and: [
-        { loc: { $geoWithin: { $centerSphere: [[lng, lat], radius] } } },
-        { bloodGroup: { $eq: bloodGroup } }
-      ]
-    })
-      .sort("asc")
-      .limit(5);
-
+    // const bloodDonors = await BloodDonor.find({
+    //   $and: [
+    //     { loc: { $geoWithin: { $centerSphere: [[lng, lat], radius] } } },
+    //     { bloodGroup: { $eq: bloodGroup } }
+    //   ]
+    // })
+    //   .sort("asc")
+    //   .limit(5);  
+ 
     // const bloodDonors = await BloodDonor.aggregate([
     //   { $match: { bloodGroup: "test +" } },
     // ]);
 
-    var filteredDonorsByGroup = bloodDonors.filter(function (donor) {
+    const filteredDonorsByGroup = bloodDonors.filter(function (donor) {
       if (donor.bloodGroup === bloodGroup) {
         return donor;
       }
@@ -163,18 +157,16 @@ exports.getDonorByCondition = async (req, res) => {
 
     console.log(filteredDonorsByGroup);
 
-    // console.log(bloodDonors)
-
     res.status(200).json({
       status: "success",
       data: {
-        filteredDonorsByGroup,
-      },
+        bloodDonors
+      }
     });
   } catch (err) {
     res.status(404).json({
       status: "fail",
-      message: err,
-    });
+      message: err
+    });  
   }
 };
