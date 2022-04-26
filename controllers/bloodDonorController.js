@@ -160,7 +160,7 @@ exports.getDonorByCondition = async (req, res) => {
     res.status(200).json({
       status: "success",
       data: {
-        bloodDonors
+        filteredDonorsByGroup
       }
     });
   } catch (err) {
